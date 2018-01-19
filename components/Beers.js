@@ -7,7 +7,7 @@ import {
 } from 'native-base';
 
 const Beers = () => (
-  <Text textColor='white'>
+  <Text>
     Beers
   </Text>
 )

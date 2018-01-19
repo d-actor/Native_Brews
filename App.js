@@ -14,6 +14,7 @@ import {
   Icon,
   Drawer,
   Button,
+  StyleProvider,
 } from 'native-base';
 import { NativeRouter, Route, Switch } from 'react-router-native';
 import Sidebar from './components/Sidebar';
@@ -21,6 +22,7 @@ import Home from './components/Home';
 import Beers from './components/Beers';
 import Breweries from './components/Breweries';
 import RealFooter from './components/Footer';
+import getTheme from './native-base-theme/components';
 
 class App extends React.Component {
   state = { drawerOpen: false }
@@ -52,50 +54,52 @@ class App extends React.Component {
   render() {
     return (
       <NativeRouter>
-        <Container style={{backgroundColor: 'black'}}>
-          <Header>
-            <Left>
-            <Button 
-              transparent 
-              iconLeft 
-              title='Home'
-              onPress={this.toggleDrawer}
-            >
-              <Icon name='ios-beer' />
-            </Button>
-            </Left>
-            <Body>
-              <Title>Brewery</Title>
-              <Title>Data Base</Title>
-            </Body>
-            <Right />
-          </Header>
-          <Content>
-            <Drawer
-              ref={ ref => { this.drawer = ref }}
-              content={
-                <Sidebar
-                  close={this.toggleDrawer}
-                  navigator={this._navigator}
-                />
+        <StyleProvider style={getTheme()}>
+          <Container>
+            <Header>
+              <Left>
+              <Button 
+                transparent 
+                iconLeft 
+                title='Home'
+                onPress={this.toggleDrawer}
+              >
+                <Icon name='ios-beer' />
+              </Button>
+              </Left>
+              <Body>
+                <Title>Brewery</Title>
+                <Title>Data Base</Title>
+              </Body>
+              <Right />
+            </Header>
+            <Content>
+              <Drawer
+                ref={ ref => { this.drawer = ref }}
+                content={
+                  <Sidebar
+                    close={this.toggleDrawer}
+                    navigator={this._navigator}
+                  />
+                }
+                onClose={this.closeDrawer}
+              >
+              </Drawer>
+              { this.state.drawerOpen ? null :
+                <View>
+                  <Switch>
+                    <Route exact path='/' component={Home} />
+                    <Route exact path='/beers' component={Beers} />
+                    <Route exact path='/breweries' component={Breweries} />
+                  </Switch>
+                </View>
               }
-              onClose={this.closeDrawer}
-            >
-            </Drawer>
-            { this.state.drawerOpen ? null :
-              <View>
-                <Switch>
-                  <Route exact path='/' component={Home} />
-                  <Route exact path='/beers' component={Beers} />
-                  <Route exact path='/breweries' component={Breweries} />
-                </Switch>
-              </View>
-            }
-          </Content>
-          <Footer>
-            <RealFooter />
-          </Footer>
-        </Container>
+            </Content>
+            <Footer>
+              <RealFooter />
+            </Footer>
+          </Container>
+        </StyleProvider>
       </NativeRouter>
     );
   }

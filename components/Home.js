@@ -7,8 +7,8 @@ import {
 } from 'native-base';
 
 const Home = () => (
-  <Text textColor='white'>
-    Home
+  <Text>
+    Home, come on render
   </Text>
 )
 
