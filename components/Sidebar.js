@@ -2,13 +2,14 @@ import React from 'react';
 import { withRouter } from 'react-router-native';
 import { Text, Platform, Dimensions } from 'react-native';
 import { List, ListItem } from 'native-base';
+
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
 const navs = [
   { name: 'Home', path: '/' },
-  { name: 'Beers', path: '/dates' },
-  { name: 'Breweries', path: '/profile' },
+  { name: 'Beers', path: '/beers' },
+  { name: 'Breweries', path: '/breweries' },
 ]
 
 const navigate = ( close, history, path ) => {
